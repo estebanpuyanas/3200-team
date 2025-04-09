@@ -1,16 +1,11 @@
 from flask import Blueprint, request, jsonify, make_response, current_app
 from backend.db_connection import db
 
-players = Blueprint('playersStats_minutes', __name__)
+playerStatsByMinutes = Blueprint('playersStats_minutes', __name__)
 
 #------------------------------------------------------------
-@players.route('/playerStats_minutes', methods=['GET'])
-def get_players():
-    # Get the 'min_play_time' from the query parameters, default to 30 minutes if not provided
-    min_play_time = request.args.get('min_play_time', default=30, type=int)
-    
-    # Convert the minutes to the proper format 'HH:MM:SS' (this assumes you only care about whole minutes)
-    
+@playerStatsByMinutes.route('/playerStats_minutes', methods=['GET'])
+def get_playersStats_minutes():
     cursor = db.get_db().cursor()
     cursor.execute('''
         SELECT
